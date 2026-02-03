@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Listing</title>
+</head>
+<body>
+
+    <h2>Add New Listing</h2>
+
+    <form action="/listings/create" method="post">
+
+        <!-- Title -->
+        <label>Title:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <!-- Description -->
+        <label>Description:</label><br>
+        <textarea name="description" rows="3" required></textarea><br><br>
+
+        <!-- Image URL -->
+        <label>Image URL:</label><br>
+        <input type="text" name="urlLink" required><br><br>
+
+        <!-- Price -->
+        <label>Price (₹):</label><br>
+        <input type="number" name="price" required><br><br>
+
+        <!-- Location -->
+        <label>Location:</label><br>
+        <input type="text" name="location" required><br><br>
+
+        <!-- Country -->
+        <label>Country:</label><br>
+        <input type="text" name="country" required><br><br>
+
+        <!-- Submit -->
+        <button type="submit">Add Listing</button>
+
+    </form>
+
+</body>
+</html>

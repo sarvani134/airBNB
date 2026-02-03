@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show</title>
+    <style>
+        .image{
+            height: 200px;
+            align-items: center;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>About:  </h1>
+    <div > <img class="image" src="<%=listings.image.url  %>" </div>
+    <!-- <div class="url"><%=listings.image.url  %></div> -->
+            <div>
+                 <h3> title:  <%=listings.title  %></h3>
+            <h3>description:  <%=listings.description  %></h3>
+              <h3>price: &#8377 <%=listings.price.toLocaleString("en-IN")  %></h3>
+                <h3>country:  <%=listings.country  %></h3>
+            <h3>location:  <%=listings.location  %></h3>
+                </div>
+        
+</body>
+</html>

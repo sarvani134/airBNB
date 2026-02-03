@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listings</title>
+</head>
+<body>
+    <h1>All Listings</h1>
+    <br><form method="get" action="/listings/create"><button>Create a new List </button></form>
+    <% for(list of listings){ %>
+            <div>
+                <h3><%=list.title  %></h3>
+            <h3><%=list.description  %></h3>
+            <h3><%=list.location  %></h3>
+            <form method="get" action="/listings/<%=list._id  %>"><button>See in detail </button></form>
+             
+            <hr>
+            </div>
+        <% } %>
+</body>
+</html>
