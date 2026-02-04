@@ -14,6 +14,10 @@
             <h3><%=list.description  %></h3>
             <h3><%=list.location  %></h3>
             <form method="get" action="/listings/<%=list._id  %>"><button>See in detail </button></form>
+             <form action="/listings/delete?_method=delete" method="post" ><button>
+                <input type="hidden" value="<%=list._id  %>" name="id"  />
+                Delete the listing </button></form>
+                <form method="get" action="/listings/edit/<%=list._id  %>"><button>Edit the listing</button></form>
              
             <hr>
             </div>

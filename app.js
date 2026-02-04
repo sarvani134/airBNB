@@ -4,6 +4,8 @@ const path=require("path")
 const app=express()
 const initData=require("./models/data")
 const Listing=require("./models/listing")
+const methodOverride=require("method-override")
+app.use(methodOverride("_method"))
 app.set("view engine","ejs")
 app.set("views",path.join(__dirname,"/views"))
 app.use(express.static(path.join(__dirname,"public")))
@@ -23,7 +25,7 @@ main()
     
 })
 app.get("/",(req,res)=>{
-    res.send("airBnb")
+    res.redirect("/listings")
     
 })
 app.get("/listings", async(req,res)=>{
@@ -65,6 +67,7 @@ app.post("/listings/create",async (req,res)=>{
 app.get("/listings/:id",async (req,res)=>{
    try{
      let {id}=req.params;
+     console.log(id)
     let listings=await Listing.findById(id)
     console.log(listings)
     res.render("show",{listings})
@@ -74,6 +77,42 @@ app.get("/listings/:id",async (req,res)=>{
     console.log(err)
    }
 })
+// app.patch("/listings/edit",async (res,res){
+        // try{
+
+        // }
+        // catch(err){
+
+        // }
+
+// })
+app.delete("/listings/delete",async (req,res)=>{
+   try{
+     let {id}=req.body;
+    await Listing.findByIdAndDelete(id)
+    res.redirect("/listings")
+   }
+   catch(err){
+    console.log(err)
+   }
+})
+app.get("/listings/edit/:id",async (req,res)=>{
+    let {id}=req.params;
+    console.log(id)
+    let listings=await Listing.findById(id)
+    
+        res.render("edit",{listings})
+
+})
+// app.post("/listings/edit",async(req,res)=>{
+//     let {id}=req.body;
+//     await Listing.findByIdAndUpdate(id,)
+// })
+
+// app.patch("/listings/edit",async (req,res)=>{
+
+
+// })
 // 
 
 // async function init (){

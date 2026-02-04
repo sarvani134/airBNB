@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Listing</title>
+
+    <style>
+        .image {
+            height: 200px;
+            width: 200px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Edit Listing</h1>
+
+    <form action="/listings/edit?_method=Patch" method="POST" >
+        <input type="hidden" name="id"  value="<% listings._id %>" />
+    </form>>
+
+        <!-- Show Image -->
+        <img class="image" src="<%= listings.image.url %>" alt="Listing Image">
+
+        <!-- Title -->
+        <label>Title</label>
+        <input 
+            type="text" 
+            name="title" 
+            value="<%= listings.title %>" 
+            required
+        >
+
+        <!-- Description -->
+        <label>Description</label>
+        <textarea 
+            name="description" 
+            rows="4"
+            required
+        ><%= listings.description %></textarea>
+
+        <!-- Price -->
+        <label>Price</label>
+        <input 
+            type="number" 
+            name="price" 
+            value="<%= listings.price %>" 
+            required
+        >
+
+        <!-- Country -->
+        <label>Country</label>
+        <input 
+            type="text" 
+            name="country" 
+            value="<%= listings.country %>" 
+            required
+        >
+
+        <!-- Location -->
+        <label>Location</label>
+        <input 
+            type="text" 
+            name="location" 
+            value="<%= listings.location %>" 
+            required
+        >
+
+        <!-- Image URL (Optional) -->
+        <label>Image URL</label>
+        <input 
+            type="text" 
+            name="imageUrl" 
+            value="<%= listings.image.url %>"
+        >
+
+        <!-- Submit -->
+        <button type="submit">Update Listing</button>
+
+    </form>
+
+</body>
+</html>
