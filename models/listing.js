@@ -24,6 +24,10 @@ let listingSchema=new Schema({
     country:{
         type:String
     },
+    bookingCount:{
+        type:Number,
+        default:0
+    }
 })
 let Listing=mongoose.model("Listing",listingSchema)
  module.exports=Listing

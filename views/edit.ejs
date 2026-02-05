@@ -28,9 +28,9 @@
 
     <h1>Edit Listing</h1>
 
-    <form action="/listings/edit?_method=Patch" method="POST" >
-        <input type="hidden" name="id"  value="<% listings._id %>" />
-    </form>>
+    <form action="/listings/edit?_method=patch" method="POST" >
+        <input type="hidden" name="id"  value="<%= listings._id %>" />
+    
 
         <!-- Show Image -->
         <img class="image" src="<%= listings.image.url %>" alt="Listing Image">
@@ -88,7 +88,7 @@
         >
 
         <!-- Submit -->
-        <button type="submit">Update Listing</button>
+        <button>Update Listing</button>
 
     </form>
 

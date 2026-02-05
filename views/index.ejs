@@ -7,18 +7,31 @@
 </head>
 <body>
     <h1>All Listings</h1>
+
     <br><form method="get" action="/listings/create"><button>Create a new List </button></form>
+   <form method="get" action="/listings/sort" >
+    <select name="sort" onchange="this.form.submit()">
+        <option value="">Sort By</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="bookingRate">More booked </option>
+        
+    </select>
+</form>
+
     <% for(list of listings){ %>
             <div>
                 <h3><%=list.title  %></h3>
             <h3><%=list.description  %></h3>
             <h3><%=list.location  %></h3>
+            <h3>Price: <%=list.price  %></h3>
+            <h3>bookingCount: <%=list.bookingCount  %></h3>
             <form method="get" action="/listings/<%=list._id  %>"><button>See in detail </button></form>
              <form action="/listings/delete?_method=delete" method="post" ><button>
                 <input type="hidden" value="<%=list._id  %>" name="id"  />
                 Delete the listing </button></form>
                 <form method="get" action="/listings/edit/<%=list._id  %>"><button>Edit the listing</button></form>
-             
+             <form method="get" action="/listings/book/<%=list._id  %>"><button>Book</button></form>
             <hr>
             </div>
         <% } %>

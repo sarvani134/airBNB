@@ -1,15 +1,19 @@
 const express=require("express")
 const mongoose=require("mongoose")
 const path=require("path")
+const ejsMate=require("ejs-mate")
 const app=express()
+
 const initData=require("./models/data")
 const Listing=require("./models/listing")
 const methodOverride=require("method-override")
+app.use(express.urlencoded({extended:true}))
 app.use(methodOverride("_method"))
+app.engine("ejs", ejsMate);  
 app.set("view engine","ejs")
 app.set("views",path.join(__dirname,"/views"))
 app.use(express.static(path.join(__dirname,"public")))
-app.use(express.urlencoded({extended:true}))
+
 app.listen(8080,()=>{
 console.log("listening from port 8080")
 })
@@ -34,6 +38,45 @@ app.get("/listings", async(req,res)=>{
    
         res.render("index",{listings:lists})
 })
+app.get("/listings/book/:id",async(req,res)=>{
+    let {id}=req.params;
+    
+
+    res.render("book",{listId:id})
+})
+app.post("/listings/book",async(req,res)=>{
+
+    try{
+        let {id}=req.body;
+        let listing=await Listing.findByIdAndUpdate(id,{$inc:{bookingCount:1}})
+        res.redirect("/listings")
+    }
+    catch(err){
+        console.log(err)
+    }
+
+})
+app.get("/listings/sort", async (req, res) => {
+    try {
+        let sortOption = {};
+
+        if (req.query.sort === "price_asc") {
+            sortOption.price = 1;   // Ascending
+        } 
+        else if (req.query.sort === "price_desc") {
+            sortOption.price = -1;  // Descending
+        }
+       
+
+        const listings = await Listing.find().sort(sortOption);
+
+        res.render("index", { listings });
+
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 app.get("/listings/create",(req,res)=>{
     res.render("create")
 })
@@ -67,9 +110,9 @@ app.post("/listings/create",async (req,res)=>{
 app.get("/listings/:id",async (req,res)=>{
    try{
      let {id}=req.params;
-     console.log(id)
+     
     let listings=await Listing.findById(id)
-    console.log(listings)
+    
     res.render("show",{listings})
 
    }
@@ -98,16 +141,34 @@ app.delete("/listings/delete",async (req,res)=>{
 })
 app.get("/listings/edit/:id",async (req,res)=>{
     let {id}=req.params;
-    console.log(id)
+    
     let listings=await Listing.findById(id)
     
         res.render("edit",{listings})
 
 })
-// app.post("/listings/edit",async(req,res)=>{
-//     let {id}=req.body;
-//     await Listing.findByIdAndUpdate(id,)
-// })
+app.patch("/listings/edit",async(req,res)=>{
+   let { id, title, description, price, location, country,imageUrl } = req.body;
+
+let image = {
+  filename: "listingimage",
+  url: imageUrl
+};
+
+await Listing.findByIdAndUpdate(
+  id,
+  {
+    title,
+    description,
+   price: parseInt(price),
+    location,
+    country,
+    image
+  },
+  { new: true }
+);
+res.redirect("/listings")
+})
 
 // app.patch("/listings/edit",async (req,res)=>{
 
