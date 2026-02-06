@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>listings</title>
-</head>
+<% layout("/layouts/boilerPlate") %>
 <body>
     <h1>All Listings</h1>
 
@@ -17,23 +11,29 @@
         <option value="bookingRate">More booked </option>
         
     </select>
-</form>
+<div class="cards-container">
 
-    <% for(list of listings){ %>
-            <div>
-                <h3><%=list.title  %></h3>
-            <h3><%=list.description  %></h3>
-            <h3><%=list.location  %></h3>
-            <h3>Price: <%=list.price  %></h3>
-            <h3>bookingCount: <%=list.bookingCount  %></h3>
-            <form method="get" action="/listings/<%=list._id  %>"><button>See in detail </button></form>
-             <form action="/listings/delete?_method=delete" method="post" ><button>
-                <input type="hidden" value="<%=list._id  %>" name="id"  />
-                Delete the listing </button></form>
-                <form method="get" action="/listings/edit/<%=list._id  %>"><button>Edit the listing</button></form>
-             <form method="get" action="/listings/book/<%=list._id  %>"><button>Book</button></form>
-            <hr>
-            </div>
-        <% } %>
+<% for (let list of listings) { %>
+
+<div class="card" style="width: 18rem;">
+
+  <form method="get" action="/listings/<%=list._id%>">
+    <button><img class="img-btn" src="<%= list.image.url %>" class="card-img-top" alt="listingImage"/></button>
+  </form>
+
+  <div class="card-body">
+      <h5><%= list.title %></h5>
+      <p>
+        Price: <i class="fa-solid fa-indian-rupee-sign"></i>
+        <%= list.price.toLocaleString("en-IN") %>
+      </p>
+  </div>
+
+</div>
+
+<% } %>
+
+</div>
+           
+       
 </body>
-</html>
