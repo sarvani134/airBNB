@@ -39,6 +39,7 @@ app.get("/listings", async(req,res)=>{
    
         res.render("index",{listings:lists})
 })
+
 app.get("/listings/book/:id",async(req,res)=>{
     let {id}=req.params;
     
@@ -66,6 +67,9 @@ app.get("/listings/sort", async (req, res) => {
         } 
         else if (req.query.sort === "price_desc") {
             sortOption.price = -1;  // Descending
+        }
+        else if (req.query.sort==='more_popular'){
+            sortOption.bookingCount=-1;
         }
        
 
@@ -108,19 +112,7 @@ app.post("/listings/create",async (req,res)=>{
         }
 
 })
-app.get("/listings/:id",async (req,res)=>{
-   try{
-     let {id}=req.params;
-     
-    let listings=await Listing.findById(id)
-    
-    res.render("show",{listings})
 
-   }
-   catch(err){
-    console.log(err)
-   }
-})
 // app.patch("/listings/edit",async (res,res){
         // try{
 
@@ -140,6 +132,17 @@ app.delete("/listings/delete",async (req,res)=>{
     console.log(err)
    }
 })
+app.get("/listings/edit",  (req, res) => {
+    let { id } = req.query;
+
+   
+    if (!id) {
+        return res.render("editing");
+    }
+
+    res.redirect(`/listings/edit/${id}`);
+});
+
 app.get("/listings/edit/:id",async (req,res)=>{
     let {id}=req.params;
     
@@ -148,8 +151,9 @@ app.get("/listings/edit/:id",async (req,res)=>{
         res.render("edit",{listings})
 
 })
+
 app.patch("/listings/edit",async(req,res)=>{
-   let { id, title, description, price, location, country,imageUrl } = req.body;
+   let { id, title, description, price, location, country,imageUrl,discount } = req.body;
 
 let image = {
   filename: "listingimage",
@@ -164,13 +168,27 @@ await Listing.findByIdAndUpdate(
    price: parseInt(price),
     location,
     country,
-    image
+    image,
+    discount:parseInt(discount)
   },
   { new: true }
 );
 res.redirect("/listings")
 })
+app.get("/listings/:id",async (req,res)=>{
+   try{
+     let {id}=req.params;
+     
+    let listings=await Listing.findById(id)
+    
+    
+    res.render("show",{listings})
 
+   }
+   catch(err){
+    console.log(err)
+   }
+})
 // app.patch("/listings/edit",async (req,res)=>{
 
 

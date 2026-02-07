@@ -1,71 +1,113 @@
 <% layout("/layouts/boilerPlate") %>
-<body>
 
-    <h1>Edit Listing</h1>
+<div class="listing-details">
 
-    <form action="/listings/edit?_method=patch" method="POST" >
-        <input type="hidden" name="id"  value="<%= listings._id %>" />
-    
+  <div class="card2 mb-3">
 
-        <!-- Show Image -->
-        <img class="image" src="<%= listings.image.url %>" alt="Listing Image">
+    <div class="row g-0">
 
-        <!-- Title -->
-        <label>Title</label>
-        <input 
-            type="text" 
-            name="title" 
-            value="<%= listings.title %>" 
-            required
+      <!-- Image Section -->
+      <div class="col-md-5">
+        <img
+          src="<%= listings.image.url %>"
+          class="img-fluid listing-img"
+          alt="Listing Image"
         >
+      </div>
 
-        <!-- Description -->
-        <label>Description</label>
-        <textarea 
-            name="description" 
-            rows="4"
-            required
-        ><%= listings.description %></textarea>
+      <!-- Form Section -->
+      <div class="col-md-7">
 
-        <!-- Price -->
-        <label>Price</label>
-        <input 
-            type="number" 
-            name="price" 
-            value="<%= listings.price %>" 
-            required
-        >
+        <div class="card2-body">
 
-        <!-- Country -->
-        <label>Country</label>
-        <input 
-            type="text" 
-            name="country" 
-            value="<%= listings.country %>" 
-            required
-        >
+          <h3 class="card2-title mb-3 text-center">
+            Edit Listing
+          </h3>
 
-        <!-- Location -->
-        <label>Location</label>
-        <input 
-            type="text" 
-            name="location" 
-            value="<%= listings.location %>" 
-            required
-        >
+          <form action="/listings/edit?_method=patch" method="POST">
 
-        <!-- Image URL (Optional) -->
-        <label>Image URL</label>
-        <input 
-            type="text" 
-            name="imageUrl" 
-            value="<%= listings.image.url %>"
-        >
+            <input type="hidden" name="id" value="<%= listings._id %>">
 
-        <!-- Submit -->
-        <button>Update Listing</button>
+            <!-- Title -->
+            <label><b>Title</b></label>
+            <input
+              type="text"
+              name="title"
+              class="form-control mb-2"
+              value="<%= listings.title %>"
+              required
+            >
 
-    </form>
+            <!-- Description -->
+            <label><b>Description</b></label>
+            <textarea
+              name="description"
+              rows="3"
+              class="form-control mb-2"
+              required
+            ><%= listings.description %></textarea>
 
-</body>
+            <!-- Price -->
+            <label><b>Price</b></label>
+            <input
+              type="number"
+              name="price"
+              class="form-control mb-2"
+              value="<%= listings.price %>"
+              required
+            >
 
+            <!-- Country -->
+            <label><b>Country</b></label>
+            <input
+              type="text"
+              name="country"
+              class="form-control mb-2"
+              value="<%= listings.country %>"
+              required
+            >
+
+            <!-- Location -->
+            <label><b>Location</b></label>
+            <input
+              type="text"
+              name="location"
+              class="form-control mb-2"
+              value="<%= listings.location %>"
+              required
+            >
+
+            <!-- Discount -->
+            <label><b>Discount (%)</b></label>
+            <input
+              type="number"
+              name="discount"
+              class="form-control mb-2"
+              value="<%= listings.discount %>"
+            >
+
+            <!-- Image URL -->
+            <label><b>Image URL</b></label>
+            <input
+              type="text"
+              name="imageUrl"
+              class="form-control mb-3"
+              value="<%= listings.image.url %>"
+            >
+
+            <!-- Submit -->
+            <button class="btn btn-success w-100">
+              Update Listing
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

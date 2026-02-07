@@ -27,6 +27,10 @@ let listingSchema=new Schema({
     bookingCount:{
         type:Number,
         default:0
+    },
+    discount:{
+        type:Number,
+        default:0
     }
 })
 let Listing=mongoose.model("Listing",listingSchema)

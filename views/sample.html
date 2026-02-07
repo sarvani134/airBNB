@@ -14,3 +14,17 @@
             
             <hr>
             </div> -->
+
+
+            <!-- show -->
+              <h1>About:  </h1>
+    <div > <img class="image-show" src="<%=listings.image.url  %>" /></div>
+    <!-- <div class="url"><%=listings.image.url  %></div> -->
+            <div>
+                 <h5> title:  <%=listings.title  %></h5>
+            <h5>description:  <%=listings.description  %></h5>
+              <h5>price: &#8377 <%=listings.price.toLocaleString("en-IN")  %></h5>
+                <h5>country:  <%=listings.country  %></h5>
+            <h5>location:  <%=listings.location  %></h5>
+            <h5>Bookings: <%= listings.bookingCount  %></h5>
+                </div>

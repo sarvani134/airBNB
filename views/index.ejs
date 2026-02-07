@@ -1,39 +1,70 @@
 <% layout("/layouts/boilerPlate") %>
+
 <body>
-    <h1>All Listings</h1>
+  <h1>All Listings</h1>
 
-    <br><form method="get" action="/listings/create"><button>Create a new List </button></form>
-   <form method="get" action="/listings/sort" >
+  <br>
+    <form method="get" action="/listings/edit">
+    <button>Edit List</button>
+  </form><br><br>
+  <form method="get" action="/listings/create">
+    <button>Create a new List</button>
+  </form><br><br>
+
+  <form method="get" action="/listings/sort">
     <select name="sort" onchange="this.form.submit()">
-        <option value="">Sort By</option>
-        <option value="price_asc">Price: Low to High</option>
-        <option value="price_desc">Price: High to Low</option>
-        <option value="bookingRate">More booked </option>
-        
+      <option value="">Sort By</option>
+      <option value="price_asc">Price: Low to High</option>
+      <option value="price_desc">Price: High to Low</option>
+      <option value="more_popular">More Popular</option>
     </select>
-<div class="cards-container">
-
-<% for (let list of listings) { %>
-
-<div class="card" style="width: 18rem;">
-
-  <form method="get" action="/listings/<%=list._id%>">
-    <button><img class="img-btn" src="<%= list.image.url %>" class="card-img-top" alt="listingImage"/></button>
   </form>
 
-  <div class="card-body">
-      <h5><%= list.title %></h5>
-      <p>
-        Price: <i class="fa-solid fa-indian-rupee-sign"></i>
-        <%= list.price.toLocaleString("en-IN") %>
-      </p>
+
+ 
+  <div class="cards-container">
+
+    <% for (let list of listings) { %>
+
+      <div class="card" style="width: 18rem;">
+
+        <a href="/listings/<%= list._id %>">
+          <img
+            class="img-btn"
+            src="<%= list.image.url %>"
+            alt="listingImage"
+          />
+        </a>
+
+        <div class="card-body">
+          <h5><%= list.title %></h5>
+
+          <p>
+            <!-- Price: ₹ <%= list.price.toLocaleString("en-IN") %> -->
+             <% if(list.discount>0){ %>
+                 <%  
+                discountPrice=Math.round(list.price*(list.discount)/100);
+                finalAmount=list.price-discountPrice;
+                %>
+                 <span class="original-price">Original Price<%=list.price.toLocaleString("en-IN") %></span><br>
+               <span class="newAmount">Final Price<%=finalAmount  %></span>
+              
+              <% } else{ %>
+ <span>Price <%=list.price.toLocaleString("en-IN") %></span>
+                <% } %>
+              
+          </p><br>
+          <a href="/listings/book/<%=list._id  %>" >
+            <button class="book-btn">Book</button>
+
+          </a>
+        </div>
+
+      </div>
+
+    <% } %>
+
   </div>
 
-</div>
 
-<% } %>
-
-</div>
-           
-       
 </body>
