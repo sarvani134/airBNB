@@ -1,6 +1,7 @@
 const express=require("express")
 const app=express()
 const path=require("path")
+const ExpressError=require("./ExpressError")
 app.set("view engine","ejs")
 app.set("views",path.join(__dirname,"views"))
 
@@ -24,25 +25,29 @@ app.use("/api",(req,res,next)=>{
     if(token=='accessgiven'){
         return next();
     }
-    res.render("accessDenied")
+    // res.render("accessDenied")
+    throw new ExpressError(401,"Access Denied")
 })
 app.get("/err",(req,res)=>{
     abcd=abcd;
 })
-app.use((err,req,res,next)=>{
-    console.log("@@@@@@@@@@@@@@@@@@@@@ Error @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    // res.send("something went wrong")
-    next();
+app.get("/admin",(req,res)=>{
+    throw new ExpressError(403,"access is forbidden")
 })
 
-app.get("/api",(req,res)=>[
+app.get("/api",(req,res)=>{
     res.send("data")
-])
+})
 app.get("/",(req,res)=>{
 res.send("Home page for middle ware")
 })
 app.get("/random",(req,res)=>{
     res.send("random page")
+})
+app.use((err,req,res,next)=>{
+    console.log("@@@@@@@@@@@@@@@@@@@@@ Error @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    // res.send("something went wrong")
+        res.status(err.status || 500).send(err.message || "Something went wrong");
 })
 // app.use((req,res)=>{
 //     res.render("pageNotFound")

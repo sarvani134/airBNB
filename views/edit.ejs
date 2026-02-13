@@ -24,7 +24,7 @@
             Edit Listing
           </h3>
 
-          <form action="/listings/edit?_method=patch" method="POST">
+          <form action="/listings/edit?_method=patch" method="POST" novalidate class="needs-validation">
 
             <input type="hidden" name="id" value="<%= listings._id %>">
 
@@ -66,6 +66,8 @@
               value="<%= listings.country %>"
               required
             >
+             <!-- <div class="valid-feedback">country name valid</div> -->
+              <div class="invalid-feedback">country name invalid</div>
 
             <!-- Location -->
             <label><b>Location</b></label>
@@ -76,8 +78,8 @@
               value="<%= listings.location %>"
               required
             >
-
-            <!-- Discount -->
+            <!-- <div class="valid-feedback">locationvalid</div> -->
+              <div class="invalid-feedback">location invalid</div>
             <label><b>Discount (%)</b></label>
             <input
               type="number"
@@ -93,7 +95,10 @@
               name="imageUrl"
               class="form-control mb-3"
               value="<%= listings.image.url %>"
+              required
             >
+            
+             
 
             <!-- Submit -->
             <button class="btn btn-success w-100">
@@ -111,3 +116,4 @@
   </div>
 
 </div>
+<script src="/js/rules"></script>

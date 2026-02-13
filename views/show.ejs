@@ -15,92 +15,67 @@
         >
       </div>
 
-      <!-- Form Section -->
+      <!-- Details Section -->
       <div class="col-md-7">
 
         <div class="card2-body">
 
           <h3 class="card2-title mb-3">
-            Edit Listing
+            Listing Details
           </h3>
 
-          <form action="/listings/edit?_method=patch" method="POST">
+          <!-- Title -->
+          <label><b>Title</b></label>
+          <p class="form-control mb-2">
+            <%= listings.title %>
+          </p>
 
-            <input type="hidden" name="id" value="<%= listings._id %>">
+          <!-- Description -->
+          <label><b>Description</b></label>
+          <p class="form-control mb-2" style="min-height: 80px;">
+            <%= listings.description %>
+          </p>
 
-            <!-- Title -->
-            <label><b>Title</b></label>
-            <input
-              type="text"
-              name="title"
-              class="form-control mb-2"
-              value="<%= listings.title %>"
-              required
-            >
+          <!-- Price -->
+          <label><b>Price</b></label>
+          <p class="form-control mb-2">
+            ₹ <%= listings.price %>
+          </p>
 
-            <!-- Description -->
-            <label><b>Description</b></label>
-            <textarea
-              name="description"
-              rows="3"
-              class="form-control mb-2"
-              required
-            ><%= listings.description %></textarea>
+          <!-- Country -->
+          <label><b>Country</b></label>
+          <p class="form-control mb-2">
+            <%= listings.country %>
+          </p>
 
-            <!-- Price -->
-            <label><b>Price</b></label>
-            <input
-              type="number"
-              name="price"
-              class="form-control mb-2"
-              value="<%= listings.price %>"
-              required
-            >
+          <!-- Location -->
+          <label><b>Location</b></label>
+          <p class="form-control mb-2">
+            <%= listings.location %>
+          </p>
 
-            <!-- Country -->
-            <label><b>Country</b></label>
-            <input
-              type="text"
-              name="country"
-              class="form-control mb-2"
-              value="<%= listings.country %>"
-              required
-            >
+          <!-- Discount -->
+           <% if(listings.discount> 0){ %>
+          <label><b>Discount (%)</b></label>
+          
+            <p class="form-control mb-2">
+            <%= listings.discount || 0 %> %
+          </p>
+          <% } %>
 
-            <!-- Location -->
-            <label><b>Location</b></label>
-            <input
-              type="text"
-              name="location"
-              class="form-control mb-2"
-              value="<%= listings.location %>"
-              required
-            >
+          
 
-            <!-- Discount -->
-            <label><b>Discount (%)</b></label>
-            <input
-              type="number"
-              name="discount"
-              class="form-control mb-2"
-              value="<%= listings.discount %>"
-            >
+          <!-- Action Buttons (Optional) -->
+          <div class="d-flex gap-2">
 
-            <!-- Image URL -->
-            <label><b>Image URL</b></label>
-            <input
-              type="text"
-              name="imageUrl"
-              class="form-control mb-3"
-              value="<%= listings.image.url %>"
-            >
+           
 
-            <!-- Submit -->
-            <button class="btn btn-success w-100">
-              Update Listing
-            </button>
+            <a href="/listings"
+               class="btn btn-secondary w-50">
+              Back
+            </a>
 
-          </form>
+          </div>
 
         </div>
 
