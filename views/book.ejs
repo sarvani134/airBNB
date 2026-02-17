@@ -2,8 +2,20 @@
 
 <body >
     <form method="post" action="/listings/book" >
-        <input type="text" placeholder="enter your name"  />
-        <input type="hidden" name="id" value="<%=listId  %>" />
+         <label><b>Name of Hotel</b></label>
+          <p class="form-control mb-2">
+            <%= listing.title %>
+          </p>
+           <label><b>price</b></label>
+          <p class="form-control mb-2">
+            <%= listing.price %>
+          </p>
+           <label><b>Location</b></label>
+          <p class="form-control mb-2">
+            <%= listing.location %>
+          </p>
+        <input type="text" placeholder="enter your name"  required/>
+        <input type="hidden" name="id" value="<%=listing._id  %>" />
         <button>Submit</button>
     </form>
 </body>

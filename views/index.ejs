@@ -47,8 +47,9 @@
                 discountPrice=Math.round(list.price*(list.discount)/100);
                 finalAmount=list.price-discountPrice;
                 %>
-                 <span class="original-price">Original Price<%=list.price.toLocaleString("en-IN") %></span><br>
-               <span class="newAmount">Final Price<%=finalAmount.toLocaleString("en-IN")  %></span>
+                 <span class="original-price">Original Price: <%=list.price.toLocaleString("en-IN") %></span><br>
+               <span class="newAmount">Final Price: <%=finalAmount.toLocaleString("en-IN")  %></span>
+               <form></form>
               
               <% } else{ %>
  <span>Price <%=list.price.toLocaleString("en-IN") %></span>

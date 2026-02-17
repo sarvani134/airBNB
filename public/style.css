@@ -46,6 +46,18 @@ body {
 
     overflow: hidden;
 }
+/* review container */
+.review-container {
+  display: flex;
+  flex-wrap: wrap;        /* Allows multiple rows */
+  gap: 20px;              /* Space between cards */
+}
+
+.review-card {
+  width: 48%;             /* 2 cards per row */
+  box-sizing: border-box;
+}
+
 
 /* Image */
 .listing-img {

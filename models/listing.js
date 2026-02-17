@@ -1,5 +1,6 @@
 const  mongoose = require("mongoose");
 const Schema=mongoose.Schema
+const Review=require("./reviews")
 let listingSchema=new Schema({
     title:String,
     description:{
@@ -31,7 +32,13 @@ let listingSchema=new Schema({
     discount:{
         type:Number,
         default:0
-    }
+    },
+    reviews:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:"Review"
+        }
+    ]
 })
 let Listing=mongoose.model("Listing",listingSchema)
  module.exports=Listing
