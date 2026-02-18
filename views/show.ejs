@@ -69,51 +69,7 @@
           </p>
 
             <% } %>
-            <form method="post" action="/listings/<%=listings._id%>/reviews">
-            <div class="form-control mb-2">
-              <h4>Add a review </h4>
-                <label>Rating</label>
-                <input class="form-range" type="range" min="1" max="5"  name="review[rating]" />
-            </div>
-             <div class="form-control mb-2">
-              <h4>Add a comment </h4>
-                <label>Comment</label>
-                <textarea 
-                name="review[comment]"
-              
-                ></textarea><br><br>
-                <button>Submit</button>
-            </div>
-          
-         
-               <div class="review-container">
-
-  <% for(let review of listings.reviews){ %>
-
-    <div class="card review-card">
-
-      <div class="card-body">
-        <h5 class="card-title">UserName:</h5>
-
-        <h6 class="card-subtitle mb-2 text-body-secondary">
-          Comment: <%= review.comment %>
-        </h6>
-
-        <p class="card-text">
-          Rating: <%= review.rating %>
-        </p>
-      </div>
-
-    </div>
-
-  <% } %>
-
-</div>
-
-  </form>
-
-          
-
+           
           <!-- Action Buttons (Optional) -->
           <div class="d-flex gap-2">
 
@@ -131,6 +87,73 @@
       </div>
 
     </div>
+
+  </div>
+
+</div>
+<div class="card2 mb-3">
+
+  <!-- Review Form -->
+  <form 
+    method="post" 
+    action="/listings/<%=listings._id%>/reviews"
+    class="review-form"
+  >
+
+    <h4 class="mb-3">Add a Review</h4>
+
+    <!-- Rating -->
+    <div class="mb-3">
+      <label class="form-label">Rating</label>
+      <input 
+        class="form-range" 
+        type="range" 
+        min="1" 
+        max="5" 
+        name="review[rating]" 
+      />
+    </div>
+
+    <!-- Comment -->
+    <div class="mb-3">
+      <label class="form-label">Comment</label>
+      <textarea 
+        name="review[comment]"
+        placeholder="Write your review..."
+      ></textarea>
+    </div>
+
+    <button type="submit">Submit Review</button>
+
+  </form>
+
+
+  <!-- Reviews List -->
+  <div class="review-container">
+
+    <% for(let review of listings.reviews){ %>
+
+      <div class="card review-card">
+
+        <div class="card-body">
+
+          <h5>User</h5>
+
+          <h6>
+            <%= review.comment %>
+          </h6>
+
+          <p>
+            ⭐ Rating: <%= review.rating %>/5
+          </p><br>
+          <form method="post" action="/listings/<%=listings._id%>/reviews/<%=review._id  %>?_method=DELETE"><button style="background-color: red; color: white;">Delete</button></form>
+
+
+        </div>
+
+      </div>
+
+    <% } %>
 
   </div>
 

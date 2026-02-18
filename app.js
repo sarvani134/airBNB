@@ -117,6 +117,9 @@ app.post("/listings/create",async (req,res)=>{
 app.delete("/listings/delete",async (req,res)=>{
    try{
      let {id}=req.body;
+     if(!id){
+        res.render("delete")
+     }
     await Listing.findByIdAndDelete(id)
     res.redirect("/listings")
    }
@@ -195,15 +198,25 @@ app.get("/listings/:id",async (req,res)=>{
    }
 })
 app.post("/listings/:id/reviews",async(req,res)=>{
+    let {id}=req.params;
     let listing=await Listing.findById(req.params.id)
     let newReview=new Review(req.body.review)
-    listing.reviews.push(newReview)
+   
     await newReview.save();
+     listing.reviews.push(newReview)
     await listing.save()
     console.log("new Review Saved")
-    res.send("comment saved")
+    // console.log(listing)
+   res.redirect(`/listings/${id}`)
 
 })
+// delete review
+app.delete("/listings/:id/reviews/:reviewId",asyncWrap(async(req,res)=>{
+    let {id,reviewId}=req.params;
+    await Review.findByIdAndDelete(reviewId)
+    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}})
+    res.redirect(`/listings/${id}`)
+}))
 app.use((err,req,res,next)=>{
     res.status(err.status ||501).send(err.message || "Something went wrong")
 })

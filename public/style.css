@@ -46,16 +46,105 @@ body {
 
     overflow: hidden;
 }
-/* review container */
+/* Review Section */
 .review-container {
+  margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;        /* Allows multiple rows */
-  gap: 20px;              /* Space between cards */
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
 }
 
+/* Individual Review Card */
 .review-card {
-  width: 48%;             /* 2 cards per row */
-  box-sizing: border-box;
+  width: 48%;               /* 2 cards per row */
+  max-width: 380px;        /* Smaller max size */
+  border: none;
+  border-radius: 10px;
+  padding: 6px;            /* Reduced padding */
+  background: #f8f9fa;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Review Content */
+.review-card .card-body {
+  padding: 10px;           /* Reduced inner padding */
+}
+
+/* Username */
+.review-card h5 {
+  font-size: 14px;         /* Smaller */
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Comment */
+.review-card h6 {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* Rating */
+.review-card p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  margin: 0;
+}
+
+/* Review Form */
+.review-form {
+  background: #ffffff;
+  padding: 15px;           /* Reduced */
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  max-width: 500px;        /* Limit width */
+}
+
+/* Textarea */
+.review-form textarea {
+  width: 100%;
+  min-height: 65px;        /* Smaller height */
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 13px;
+}
+
+/* Submit Button */
+.review-form button {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 6px 14px;       /* Smaller button */
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.review-form button:hover {
+  background: #0b5ed7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .review-card {
+    width: 100%;          /* One per row on mobile */
+    max-width: 100%;
+  }
+
+  .review-form {
+    max-width: 100%;
+  }
 }
 
 
