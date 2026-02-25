@@ -1,18 +1,39 @@
 <% layout("/layouts/boilerPlate") %>
+<style>
+  .my-btn{
+   margin-left: 20px;
+    height: 50px;
+    display: flex;
+    text-align: center;
+    justify-items: center;
+    width: 200px;
+}
+</style>
 
 <body>
+ <% if (success && success.length > 0) { %>
+  <div class="alert alert-success">
+    <%= success %>
+  </div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <div class="alert alert-danger">
+    <%= error %>
+  </div>
+<% } %>
   <h1>All Listings</h1>
 
   <br>
     <form method="get" action="/listings/edit">
-    <button>Edit List</button>
+    <button class="my-btn">Edit List</button>
   </form><br><br>
    <br>
     <form method="post" action="/listings/delete?_method=DELETE">
-    <button>Delete  List</button>
+    <button class="my-btn">Delete  List</button>
   </form><br><br>
   <form method="get" action="/listings/create">
-    <button>Create a new List</button>
+    <button class="my-btn">Create a new List</button>
   </form><br><br>
 
   <form method="get" action="/listings/sort">

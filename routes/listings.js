@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
 const Listing = require("../models/listing");
 const Review = require("../models/reviews");
 const ExpressError = require("../ExpressError");
-
 
 function asyncWrap(fn) {
   return function (req, res, next) {
@@ -68,6 +66,10 @@ router.get("/sort", asyncWrap(async (req, res) => {
 
 
 router.get("/create", (req, res) => {
+ if(!req.isAuthenticated()){
+    req.flash("error","you must be logged in to create a listing")
+    return res.redirect("/user/login")
+ }
   res.render("create");
 });
 
@@ -87,9 +89,9 @@ router.post("/create", asyncWrap(async (req, res) => {
       url: urlLink || undefined
     }
   });
-
+     
   await newListing.save();
-
+     req.flash("success","New Listing Created")
   res.redirect("/listings");
 
 }));

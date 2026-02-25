@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Delete Listing</title>
 </head>
 <body>
-   <form method="post" action="/listings/delete?_method=DELETE">
-     <input type="text" name="id" placeholder="enter the Id " /><br><br>
-     <button>Submit</button>
-   </form>
+
+    <h2 style="text-align:center; margin-top:50px;">Delete Listing</h2>
+
+    <form method="post"
+          action="/listings/delete?_method=DELETE"
+          class="delete-form">
+
+        <label>Listing ID</label>
+
+        <input type="text"
+               name="id"
+               placeholder="Enter Listing ID"
+               required><br><br>
+
+        <button type="submit">Delete</button>
+
+    </form>
+
 </body>
 </html>
