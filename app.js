@@ -7,7 +7,7 @@ const flash=require("connect-flash")
 
 const app = express();
 const session=require("express-session")
-const listingRoutes = require("./routes/listings");
+const listingRoutes = require("./routes/listings.js");
 const passport=require("passport")
 const LocalStrategy=require("passport-local")
 const User=require("./models/user.js")

@@ -3,13 +3,21 @@ const router = express.Router();
 const Listing = require("../models/listing");
 const Review = require("../models/reviews");
 const ExpressError = require("../ExpressError");
-
+const HotelData=require("../models/data.js")
 function asyncWrap(fn) {
   return function (req, res, next) {
     fn(req, res, next).catch(next);
   };
 }
-
+const addData=async(req,res)=>{
+  await Listing.deleteMany({})
+  HotelData.data=HotelData.data.map((obj)=>({
+    ...obj,
+    owner:'699a975d969f78e82df0b770'
+  }))
+  await Listing.insertMany(HotelData.data)
+}
+addData()
 
 router.get("/", asyncWrap(async (req, res) => {
 
@@ -67,6 +75,7 @@ router.get("/sort", asyncWrap(async (req, res) => {
 
 router.get("/create", (req, res) => {
  if(!req.isAuthenticated()){
+      req.session.redirectUrl=req.originalUrl
     req.flash("error","you must be logged in to create a listing")
     return res.redirect("/user/login")
  }
@@ -96,19 +105,29 @@ router.post("/create", asyncWrap(async (req, res) => {
 
 }));
 
-
+router.get("/delete", (req, res) => {
+  res.render("delete");
+});
 router.delete("/delete", asyncWrap(async (req, res) => {
 
-  let { id } = req.body;
+  try{
+    let { id } = req.body;
 
   if (!id) {
-    return res.render("delete");
+    
+    return   res.redirect("/listings/delete");
   }
 
   await Listing.findByIdAndDelete(id);
 
   res.redirect("/listings");
 
+  }
+  catch(err){
+   console.log(err)
+   req.flash("error","enter a valid ID")
+    res.redirect("/listings/delete")
+  }
 }));
 
 
@@ -221,4 +240,6 @@ router.delete("/:id/reviews/:reviewId", asyncWrap(async (req, res) => {
 }));
 
 
-module.exports = router;
+
+
+module.exports =router;
