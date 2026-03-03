@@ -98,6 +98,7 @@ body {
 /* Card container */
 .card2 {
     width: 100%;
+   
 
     background: white;
     border-radius: 12px;
@@ -107,18 +108,30 @@ body {
     overflow: hidden;
 }
 /* Review Section */
-.review-container {
+/* .review-container {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
+  
   gap: 12px;
   justify-content: flex-start;
+} */
+.review-container {
+    display: grid;
+  
+     grid-template-columns: repeat(5, 1fr); /* 5 per row */
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+   
 }
+
+
 
 /* Individual Review Card */
 .review-card {
-  width: 48%;               /* 2 cards per row */
-  max-width: 380px;        /* Smaller max size */
+  width: 100%;               /* 2 cards per row */
+  max-width: 100%;        /* Smaller max size */
   border: none;
   border-radius: 10px;
   padding: 6px;            /* Reduced padding */
@@ -126,6 +139,8 @@ body {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
 }
+
+
 
 .review-card:hover {
   transform: translateY(-2px);
@@ -167,9 +182,61 @@ body {
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 0 1px 8px rgba(0,0,0,0.08);
-  max-width: 500px;        /* Limit width */
+ width: 100%;
+  max-width: 100%;       /* Limit width */
+}
+/* sort nav bar */
+.sort-navbar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 15px 0;
 }
 
+.sort-btn {
+  text-decoration: none;
+  padding: 8px 14px;
+  background: #f5f5f5;
+  color: #333;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: 0.3s;
+  border: 1px solid #ddd;
+}
+
+.sort-btn i {
+  margin-right: 5px;
+}
+
+.sort-btn:hover {
+  background: #198754;   /* Bootstrap green */
+  color: white;
+  border-color: #198754;
+}
+/* discount card */
+/* Discount Cloud Badge */
+.card {
+  position: relative; /* Important */
+}
+
+.discount-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+
+  background: red;
+  color: white;
+
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: bold;
+
+  border-radius: 15px 15px 15px 5px; /* cloud shape */
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+  z-index: 10;
+}
 /* Textarea */
 .review-form textarea {
   width: 100%;
@@ -353,6 +420,40 @@ body {
             font-size: 14px;
             color: #666;
         }
+        /* Heading */
+        .heading {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+
+  /* Gradient Text */
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Spacing */
+  margin: 20px 0 30px;
+  letter-spacing: 2px;
+
+  /* Soft Shadow */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+
+  /* Animation */
+  animation: fadeInDown 1s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* ================= NAVBAR ================= */
 
 nav {
@@ -372,7 +473,11 @@ nav {
 .nav-link {
     padding: 3px;
 }
-
+.btn btn-secondary w-50{
+    height: 30px;
+    width: 50px;
+    gap: 5px;
+}
 /* ================= CARDS GRID ================= */
 .body{
     margin-left: 20px;

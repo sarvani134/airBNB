@@ -3,7 +3,7 @@
 
     <h2>Add New Listing</h2>
 
-    <form action="/listings/create" method="post" class="create-form">
+    <form action="/listings/create" method="post" class="create-form" enctype="multipart/form-data">
 
         <!-- Title -->
         <label>Title:</label><br>
@@ -14,8 +14,9 @@
         <textarea name="description" rows="3" required></textarea><br><br>
 
         <!-- Image URL -->
-        <label>Image URL:</label><br>
-        <input type="text" name="urlLink" required><br><br>
+        
+         <label>Image :</label><br>
+        <input type="file" name="urlImage" required ><br><br>
 
         <!-- Price -->
         <label>Price (₹):</label><br>

@@ -22,29 +22,35 @@
     <%= error %>
   </div>
 <% } %>
-  <h1>All Listings</h1>
+  <h1 class="heading">The Travel Spot</h1>
 
-  <br>
-    <form method="get" action="/listings/edit">
-    <button class="my-btn">Edit List</button>
-  </form><br><br>
-   <br>
-    <form method="post" action="/listings/delete?_method=DELETE">
-    <button class="my-btn">Delete  List</button>
-  </form><br><br>
-  <form method="get" action="/listings/create">
-    <button class="my-btn">Create a new List</button>
-  </form><br><br>
+  
+<div class="sort-navbar">
+  <!-- More Popular -->
+  <a href="/listings/sort?sort=more_popular" class="sort-btn">
+    <i class="fa-solid fa-fire"></i> Trending
+  </a>
 
-  <form method="get" action="/listings/sort">
-    <select name="sort" onchange="this.form.submit()">
-      <option value="">Sort By</option>
-      <option value="price_asc">Price: Low to High</option>
-      <option value="price_desc">Price: High to Low</option>
-      <option value="more_popular">More Popular</option>
-    </select>
-  </form>
+  <!-- Price Low to High -->
+  <a href="/listings/sort?sort=price_asc" class="sort-btn">
+    <i class="fa-regular fa-money-bill-1"></i> Low → High
+  </a>
 
+  <!-- Price High to Low -->
+  <a href="/listings/sort?sort=price_desc" class="sort-btn">
+    <i class="fa-regular fa-money-bill-1"></i> High → Low
+  </a>
+   <a href="/listings/sort?sort=more_discount" class="sort-btn">
+    <i class="fa-solid fa-percent"></i> High Discount
+  </a>
+
+</div>
+
+ <form method="get" action="/listings/create">
+  <button style="width:150px; margin-left: 50px;height:40px;background:#2563eb;color:white;border:none;border-radius:5px;cursor:pointer;">
+    Add a new Listing
+  </button>
+</form>
 
  
   <div class="cards-container">
@@ -52,6 +58,12 @@
     <% for (let list of listings) { %>
 
       <div class="card" style="width: 18rem;">
+        <!-- Discount Cloud -->
+<% if(list.discount > 0){ %>
+  <div class="discount-badge">
+    <%= list.discount %>% OFF
+  </div>
+<% } %>
 
         <a href="/listings/<%= list._id %>">
           
@@ -81,6 +93,7 @@
                 <% } %>
               
           </p><br>
+          
           <a href="/listings/book/<%=list._id  %>" >
             <button class="book-btn">Book</button>
 

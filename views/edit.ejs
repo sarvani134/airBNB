@@ -24,7 +24,7 @@
             Edit Listing
           </h3>
 
-          <form action="/listings/edit?_method=patch" method="POST" novalidate class="needs-validation">
+          <form action="/listings/edit/<%=listings._id %>?_method=patch" method="POST"  enctype="multipart/form-data">
 
             <input type="hidden" name="id" value="<%= listings._id %>">
 
@@ -89,14 +89,8 @@
             >
 
             <!-- Image URL -->
-            <label><b>Image URL</b></label>
-            <input
-              type="text"
-              name="imageUrl"
-              class="form-control mb-3"
-              value="<%= listings.image.url %>"
-              required
-            >
+            <label>Image :</label><br>
+        <input type="file" name="urlImage"  ><br><br>
             
              
 

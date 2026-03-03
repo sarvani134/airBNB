@@ -1,160 +1,148 @@
 <% layout("/layouts/boilerPlate") %>
+<link rel="stylesheet" href="/rating.css">
 
 <div class="listing-details">
 
   <div class="card2 mb-3">
-
     <div class="row g-0">
+
+      <% if (success && success.length > 0) { %>
+        <div class="alert alert-success"><%= success %></div>
+      <% } %>
+      <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
 
       <!-- Image Section -->
       <div class="col-md-5">
-        <img
-          src="<%= listings.image.url %>"
-          class="img-fluid listing-img"
-          alt="Listing Image"
-        >
+        <img src="<%= listings.image.url %>" class="img-fluid listing-img" alt="Listing Image">
       </div>
 
       <!-- Details Section -->
       <div class="col-md-7">
-
         <div class="card2-body">
+          <h3 class="card2-title mb-3">Listing Details</h3>
 
-          <h3 class="card2-title mb-3">
-            Listing Details
-          </h3>
+          <!-- Owner -->
+          <label><b>Created by : </b></label>
+          <p class="form-control mb-2"><%= listings.owner.username %></p>
 
           <!-- Title -->
           <label><b>Title</b></label>
-          <p class="form-control mb-2">
-            <%= listings.title %>
-          </p>
+          <p class="form-control mb-2"><%= listings.title %></p>
 
           <!-- Description -->
           <label><b>Description</b></label>
-          <p class="form-control mb-2" style="min-height: 80px;">
-            <%= listings.description %>
-          </p>
+          <p class="form-control mb-2" style="min-height: 80px;"><%= listings.description %></p>
 
           <!-- Price -->
           <label><b>Price</b></label>
-          <p class="form-control mb-2">
-            ₹ <%= listings.price %>
-          </p>
+          <p class="form-control mb-2">₹ <%= listings.price %></p>
 
           <!-- Country -->
           <label><b>Country</b></label>
-          <p class="form-control mb-2">
-            <%= listings.country %>
-          </p>
+          <p class="form-control mb-2"><%= listings.country %></p>
 
           <!-- Location -->
           <label><b>Location</b></label>
-          <p class="form-control mb-2">
-            <%= listings.location %>
-          </p>
+          <p class="form-control mb-2"><%= listings.location %></p>
 
           <!-- Discount -->
-           <% if(listings.discount> 0){ %>
-          <label><b>Discount (%)</b></label>
-          
-            <p class="form-control mb-2">
-            <%= listings.discount || 0 %> %
-          </p>
+          <% if(listings.discount > 0){ %>
+            <label><b>Discount (%)</b></label>
+            <p class="form-control mb-2"><%= listings.discount %> %</p>
           <% } %>
-           <% if(listings.bookingCount>0){ %>
-                <label><b>Bookings</b></label>
-          <p class="form-control mb-2">
-            <%= listings.bookingCount %>
-          </p>
 
-            <% } %>
-           
-          <!-- Action Buttons (Optional) -->
+          <!-- Bookings -->
+          <% if(listings.bookingCount > 0){ %>
+            <label><b>Bookings</b></label>
+            <p class="form-control mb-2"><%= listings.bookingCount %></p>
+          <% } %>
+
+          <!-- Action Buttons -->
           <div class="d-flex gap-2">
-
-           
-
-            <a href="/listings"
-               class="btn btn-secondary w-50">
-              Back
-            </a>
-
+            <a href="/listings" class="btn btn-secondary w-50">Back</a>
+            <a href="/listings/edit/<%= listings._id %>" class="btn btn-secondary w-50">Edit</a>
+            
           </div>
-
+          <% if (currUser && listings.owner._id.equals(currUser._id)) { %>
+              <form 
+  action="/listings/delete?_method=DELETE" 
+  method="POST"
+  style="display:inline;"
+>
+<input type="hidden" name="id" value='<%= listings._id %>' />
+  <button class="btn btn-danger w-50">Delete</button>
+</form>
+            <% } %>
         </div>
-
       </div>
 
     </div>
-
   </div>
 
 </div>
+
 <div class="card2 mb-3">
+  <% if(currUser){ %>
+    <!-- Review Form -->
+    <form method="post" action="/listings/<%= listings._id %>/reviews" class="review-form">
+      <h4 class="mb-3">Add a Review</h4>
+      <!-- Rating -->
+      <div class="mb-3">
+        <label class="form-label">Rating</label>
+      <!-- Rating -->
+<fieldset class="starability-grow">
 
-  <!-- Review Form -->
-  <form 
-    method="post" 
-    action="/listings/<%=listings._id%>/reviews"
-    class="review-form"
-  >
+  <!-- Hidden 0-star option (default) -->
+  <input type="radio"
+         id="rate0"
+         name="review[rating]"
+         value="0"
+         checked
+         hidden />
 
-    <h4 class="mb-3">Add a Review</h4>
+  <input type="radio" id="rate5" name="review[rating]" value="5" />
+  <label for="rate5" title="5 stars"></label>
 
-    <!-- Rating -->
-    <div class="mb-3">
-      <label class="form-label">Rating</label>
-      <input 
-        class="form-range" 
-        type="range" 
-        min="1" 
-        max="5" 
-        name="review[rating]" 
-      />
-    </div>
+  <input type="radio" id="rate4" name="review[rating]" value="4" />
+  <label for="rate4" title="4 stars"></label>
 
-    <!-- Comment -->
-    <div class="mb-3">
-      <label class="form-label">Comment</label>
-      <textarea 
-        name="review[comment]"
-        placeholder="Write your review..."
-      ></textarea>
-    </div>
+  <input type="radio" id="rate3" name="review[rating]" value="3" />
+  <label for="rate3" title="3 stars"></label>
 
-    <button type="submit">Submit Review</button>
+  <input type="radio" id="rate2" name="review[rating]" value="2" />
+  <label for="rate2" title="2 stars"></label>
 
-  </form>
+  <input type="radio" id="rate1" name="review[rating]" value="1" />
+  <label for="rate1" title="1 star"></label>
 
+</fieldset>
+      <!-- Comment -->
+      <div class="mb-3">
+        <label class="form-label">Comment</label>
+        <textarea  style="width:500px;height:100px ;" name="review[comment]" placeholder="Write your review..."></textarea>
+      </div>
+     <button type="submit" style="width:200px;height:40px ; display:block;margin:10px auto;">Submit Review</button>
+    </form>
+  <% } %>
 
   <!-- Reviews List -->
   <div class="review-container">
-
-    <% for(let review of listings.reviews){ %>
-
+    <% listings.reviews.forEach(review => { %>
       <div class="card review-card">
-
         <div class="card-body">
-
-          <h5>User</h5>
-
-          <h6>
-            <%= review.comment %>
-          </h6>
-
-          <p>
-            ⭐ Rating: <%= review.rating %>/5
-          </p><br>
-          <form method="post" action="/listings/<%=listings._id%>/reviews/<%=review._id  %>?_method=DELETE"><button style="background-color: red; color: white;">Delete</button></form>
-
-
+          <p>Written by: <%= review.author.username %></p>
+          <h6><%= review.comment %></h6>
+          <p>⭐ Rating: <%= review.rating %>/5</p>
+          <% if(currUser && currUser._id.equals(review.author._id)){ %>
+            <!-- Delete button for this review -->
+            <form method="post" action="/listings/<%= listings._id %>/reviews/<%= review._id %>/delete">
+              <button style="background-color: red; color: white;">Delete</button>
+            </form>
+          <% } %>
         </div>
-
       </div>
-
-    <% } %>
-
+    <% }) %>
   </div>
-
 </div>

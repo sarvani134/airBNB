@@ -1,10 +1,12 @@
+if(process.env.NODE_ENV!='production'){
+require('dotenv').config()
+}
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 const flash=require("connect-flash")
-
 const app = express();
 const session=require("express-session")
 const listingRoutes = require("./routes/listings.js");
@@ -46,7 +48,7 @@ main()
   .catch(err => console.log(err));
 
 app.get("/", (req, res) => {
-  res.send("This is home for airBNB");
+ res.redirect("/listings")
 });
 app.use((req,res,next)=>{
   res.locals.success=req.flash("success")

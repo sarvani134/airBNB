@@ -11,6 +11,10 @@ const reviewSchema=new Schema({
     createdAt:{
             type:Date,
             dafault:Date.now()
+    },
+    author:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
     }
 })
 let Review=mongoose.model("Review",reviewSchema)
