@@ -48,7 +48,7 @@ router.post("/create",upload.single('urlImage'),asyncWrap(controller.create))
 router.get("/delete",isLoggedIn,isOwner, controller.deleteFile);
 
 router.delete("/delete", asyncWrap(controller.deleteListing));
-
+router.post("/location",asyncWrap(controller.locate))
 
 
 router.get("/edit",isLoggedIn,isOwner, controller.edit);

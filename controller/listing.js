@@ -47,7 +47,6 @@ module.exports.sort = async (req, res) => {
 
   let pipeline = [];
 
-  // Add calculated finalPrice
   pipeline.push({
     $addFields: {
       finalPrice: {
@@ -87,6 +86,25 @@ module.exports.sort = async (req, res) => {
 
   res.render("index", { listings });
 };
+module.exports.locate=async(req,res)=>{
+  try{
+    let {location}=req.body;
+  let listings=await Listing.find(
+    {location:{
+      $regex:location,
+      $options:"i"
+    }}
+  )
+  if(listings.length==0){
+    return res.send(" Sorry !Location not found ")
+  }
+  res.render("index",{listings})
+
+  }
+  catch(err){
+    res.send("error")
+  }
+}
 module.exports.create=async (req, res) => {
 
   const { title, description, location, country, price } = req.body;

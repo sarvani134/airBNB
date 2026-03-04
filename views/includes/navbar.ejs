@@ -1,29 +1,64 @@
-<nav class="navbar navbar-expand-md bg-body-tertiary sticky-top">
+<nav class="navbar navbar-expand-md bg-body-tertiary sticky-top shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold" href="/">
+      <i class="fa-solid fa-compass"></i>
+    </a>
+
+    <!-- Toggle Button -->
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link"  href="/listings">Home</a>
-        <a class="nav-link" href="/listings/create">Add new Listings</a>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Left Links -->
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" href="/listings">Home</a>
+        <a class="nav-link" href="/listings/create">Add Listings</a>
         <a class="nav-link" href="#">Pricing</a>
-       
       </div>
-    </div>
-    
-      <div class="navbar-nav" ms-auto>
+
+      <!-- CENTER SEARCH BAR -->
+      <!-- COMPACT APP STYLE SEARCH -->
+<form class="search-wrapper mx-auto" role="search" action="/listings/location" method="post">
+
+  <div class="search-pill">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input type="search"
+           placeholder="Search a location"
+           aria-label="Search"   name="location"/>
+          
+
+  </div>
+  
+
+</form>
+
+      <!-- Right Links -->
+      <div class="navbar-nav ms-auto">
+
         <% if(!currUser){ %>
-         <a class="nav-link"  href="/user/login">LogIn</a>
-        <a class="nav-link"  href="/user/signup">SignUp</a>
-        <% } %>
-       <%  if(currUser){ %>
-      
-          <a class="nav-link"  href="/user/logout">LogOut</a>
+          <a class="nav-link" href="/user/login">Login</a>
+          <a class="nav-link" href="/user/signup">Signup</a>
         <% } %>
 
-        
-        </div>
+        <% if(currUser){ %>
+          <a class="nav-link" href="/user/logout">Logout</a>
+        <% } %>
+
+      </div>
+
+    </div>
   </div>
 </nav>

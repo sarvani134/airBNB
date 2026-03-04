@@ -640,3 +640,97 @@ nav {
         font-size: 10px;
     }
 }
+/* navbar fix for mobile */
+/* ================= NAVBAR MOBILE FIX ================= */
+
+@media (max-width: 500px) {
+
+  nav {
+    height: auto;
+  }
+
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar-brand {
+    font-size: 16px;   /* readable */
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-link {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+}
+/* navbar beautify */
+/* ================= SEARCH BAR STYLE ================= */
+
+/* ================= APP STYLE SEARCH BAR ================= */
+
+/* ================= COMPACT SEARCH BAR ================= */
+
+.search-wrapper {
+  width: auto;           /* NOT full width */
+  max-width: 420px;      /* Small size */
+}
+
+/* Pill */
+.search-pill {
+  display: flex;
+  align-items: center;
+
+  background: #f5f5f5;
+
+  border-radius: 20px;
+
+  padding: 4px 8px;      /* Smaller padding */
+
+  border: 1px solid #ddd;
+}
+
+/* Icon */
+.search-pill i {
+  font-size: 15px;
+  color: #777;
+  margin-right: 6px;
+}
+
+/* Input */
+.search-pill input {
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  width: 440px;          /* Control size */
+
+  font-size: 12px;
+
+  padding: 0;
+
+  color: #333;
+}
+
+/* Focus */
+.search-pill:focus-within {
+  background: #fff;
+  border-color: #198754;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .search-wrapper {
+    max-width: 100%;
+  }
+
+  .search-pill input {
+    width: 100%;
+  }
+
+}

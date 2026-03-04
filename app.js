@@ -9,6 +9,7 @@ const methodOverride = require("method-override");
 const flash=require("connect-flash")
 const app = express();
 const session=require("express-session")
+const MongoStore = require("connect-mongo").default;
 const listingRoutes = require("./routes/listings.js");
 const passport=require("passport")
 const LocalStrategy=require("passport-local")
@@ -23,7 +24,17 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
 // session
-let sessionOptions={secret:"mySecret",
+const store= MongoStore.create({
+    mongoUrl: process.env.PASSCODE,
+    crypto:{
+     secret:"mySecret",
+    },
+    touchAfter:24*3600
+  })
+let sessionOptions={
+   store,
+  secret:"mySecret",
+ 
     resave:false,
     saveUninitialized:true,
   cookie:{
@@ -32,6 +43,10 @@ let sessionOptions={secret:"mySecret",
     httpOnly:true
   }
   }
+  store.on("error",()=>{
+    console.log("store error",err)
+  })
+   
 app.use(session(sessionOptions))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -40,7 +55,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 app.use(flash())
 async function main() {
-  await mongoose.connect("mongodb://localhost:27017/hotelBooking");
+  await mongoose.connect(process.env.PASSCODE);
 }
 
 main()
